@@ -43,17 +43,19 @@ class Gapbide:
         self.count_closed = 0
         self.count_non_closed = 0
         self.count_pruned = 0
+        self.output_ = []
 
     def run(self):
         l1_patterns = self.gen_l1_patterns()
         for pattern, sup, pdb in l1_patterns:
             self.span(pattern, sup, pdb)
+        return self.output_
 
     def output(self, pattern, sup, pdb):
         '''
         overide this function to output patterns to files.
         '''
-        print(pattern, sup, pdb)
+        self.output_.append({'pattern': pattern, 'sup': sup})
 
     def gen_l1_patterns(self):
         '''
